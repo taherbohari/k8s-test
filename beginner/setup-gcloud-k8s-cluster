@@ -1,0 +1,32 @@
+#!/bin/bash -e
+
+source common
+
+echo "## Creating k8s cluster inside ${PROJECT_ID}"
+gcloud beta container \
+	--project "${PROJECT_ID}" \
+	clusters create "${K8S_CLUSTER_NAME}" \
+	--region "${K8S_REGION}" \
+	--no-enable-basic-auth \
+	--cluster-version "${K8S_VER}" \
+	--machine-type "${MACHINE_TYPE}" \
+	--image-type "COS" \
+	--disk-type "pd-standard" \
+	--disk-size "50" \
+	--scopes "https://www.googleapis.com/auth/devstorage.read_only","https://www.googleapis.com/auth/logging.write","https://www.googleapis.com/auth/monitoring","https://www.googleapis.com/auth/servicecontrol","https://www.googleapis.com/auth/service.management.readonly","https://www.googleapis.com/auth/trace.append" \
+	--num-nodes "${NODES_PER_ZONE}" \
+	--enable-cloud-logging \
+	--enable-cloud-monitoring \
+	--enable-ip-alias \
+	--network "projects/${PROJECT_ID}/global/networks/default" \
+	--subnetwork "projects/${PROJECT_ID}/regions/${K8S_REGION}/subnetworks/default" \
+	--default-max-pods-per-node "110" \
+	--addons HttpLoadBalancing \
+	--enable-autoupgrade \
+	--enable-autorepair
+
+echo "## Setup kubectl to connect newly created k8s cluster"
+gcloud beta container clusters get-credentials standard-cluster-1 --region ${K8S_REGION} --project ${PROJECT_ID}
+
+echo "## Checking k8s cluster access"
+kubectl get nodes

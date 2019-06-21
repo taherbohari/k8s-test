@@ -1,0 +1,43 @@
+#!/bin/bash -e
+
+source common
+
+guestbook_app_deployment(){
+
+  namespace=$1
+  
+  echo -e "\n## Deploy Guestbook application on staging namespace"
+  echo "# Create ${namespace} namespace"
+  kubectl create ns ${namespace}
+
+  echo "# Set k8s context"
+  kubectl config set-context ${CLUSTER_NAME} --namespace=${namespace}
+  kubectl config use-context ${CLUSTER_NAME} 
+  
+  echo "# redis master deployment"
+  kubectl apply -f https://k8s.io/examples/application/guestbook/redis-master-deployment.yaml
+  
+  echo "# redis master service deployment"
+  kubectl apply -f https://k8s.io/examples/application/guestbook/redis-master-service.yaml
+  
+  echo "# redis slave deployment"
+  kubectl apply -f https://k8s.io/examples/application/guestbook/redis-slave-deployment.yaml
+  
+  echo "# redis slave service"
+  kubectl apply -f https://k8s.io/examples/application/guestbook/redis-slave-service.yaml
+  
+  echo "# Guestbook frontend deployment"
+  kubectl apply -f https://k8s.io/examples/application/guestbook/frontend-deployment.yaml
+ 
+  echo "# Guestbook frontend service"
+  kubectl apply -f https://k8s.io/examples/application/guestbook/frontend-service.yaml
+  
+  echo "# check what all pods are running"
+  kubectl get pods -l app=guestbook -l tier=frontend
+ 
+  echo "## Create guestbook ingress"
+  kubectl apply -f ${namespace}.yaml
+}
+
+guestbook_app_deployment staging
+guestbook_app_deployment production
