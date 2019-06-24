@@ -12,4 +12,4 @@ echo "# Creating cluster-role-binding for tiller"
     (kubectl create clusterrolebinding tiller-cluster-rule --clusterrole=cluster-admin --serviceaccount=kube-system:tiller)
 
 echo "# Deploying tiller"
-helm init --service-account tiller
+helm init --service-account tiller --wait
