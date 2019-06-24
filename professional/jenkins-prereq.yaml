@@ -1,0 +1,95 @@
+- hosts: jenkins
+  become: yes
+  tasks:
+  - name: Install Docker
+    apt:
+      name: docker.io
+      state: present
+      update_cache: true
+
+  - name: start docker and enable
+    systemd:
+      state: started
+      daemon_reload: yes
+      name: docker
+      enabled: yes
+
+  - name: Install APT Transport HTTPS
+    apt:
+      name: apt-transport-https
+      state: present
+
+  - name: Add Kubernetes apt-key
+    apt_key:
+      url: https://packages.cloud.google.com/apt/doc/apt-key.gpg
+      state: present
+
+  - name: Add Kubernetes' APT repository
+    apt_repository:
+     repo: deb http://apt.kubernetes.io/ kubernetes-xenial main
+     state: present
+     filename: 'kubernetes'
+
+  - name: Install kubectl
+    apt:
+      name: kubectl=1.14.0-00
+      state: present
+      force: yes
+
+### Install Java and Jenkins
+  - name: apt update
+    apt:
+      update_cache: true
+      name: openjdk-8-jdk
+
+  - name: Ensure dependencies are installed.
+    apt:
+      name: curl
+      state: present
+  
+  - name: Add Jenkins apt repository key.
+    apt_key:
+      url: https://pkg.jenkins.io/debian/jenkins.io.key
+      state: present
+  
+  - name: Add Jenkins apt repository.
+    apt_repository:
+      repo: deb http://pkg.jenkins.io/debian-stable binary/
+      state: present
+      update_cache: true
+
+  - name: Install jenkins
+    apt:
+      name: jenkins
+      state: present
+ 
+  - name: allow 8080
+    shell: |
+      ufw allow 8080
+
+  - name: create /var/lib/jenkins/.kube dir
+    file:
+      path: /var/lib/jenkins/.kube
+      state: directory
+      owner: jenkins
+      group: jenkins
+      mode: 0755
+
+  - name: copy k8s config file from local instance to jenkins home dir
+    copy:
+      src: "{{ lookup('env','HOME') }}/.kube/config"
+      dest: "/var/lib/jenkins/.kube/config"
+      owner: jenkins
+      group: jenkins
+      mode: 0600
+
+  - name: start and enable jenkins
+    systemd:
+      state: started
+      daemon_reload: yes
+      name: jenkins
+      enabled: yes
+
+  - name: install helm
+    shell: |
+      curl -L https://git.io/get_helm.sh | bash 

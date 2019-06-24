@@ -1,0 +1,15 @@
+#!/bin/bash -e
+
+echo -e "\n## Installing helm client on your local instance"
+curl -L https://git.io/get_helm.sh | bash
+
+echo -e "\n## Initializing helm"
+echo "# Creating Service Account for tiller"
+(kubectl get sa tiller -n kube-system) || (kubectl create serviceaccount -n kube-system tiller)
+
+echo "# Creating cluster-role-binding for tiller"
+(kubectl get clusterrolebinding tiller-cluster-rule) || \
+    (kubectl create clusterrolebinding tiller-cluster-rule --clusterrole=cluster-admin --serviceaccount=kube-system:tiller)
+
+echo "# Deploying tiller"
+helm init --service-account tiller

@@ -1,0 +1,17 @@
+#!/bin/bash
+
+NODE_ARR=$(kubectl get nodes -o jsonpath='{.items[*].metadata.name}')
+INV_FILE="/tmp/inv"
+
+echo "[nodes]" > ${INV_FILE}
+
+for node in ${NODE_ARR};do
+  ext_ip=$(gcloud compute instances describe ${node} --format='get(networkInterfaces[0].accessConfigs[0].natIP)')
+  echo ${ext_ip} >> ${INV_FILE} 
+done
+
+echo "[all:vars]" >> ${INV_FILE}
+echo "ansible_python_interpreter=/usr/bin/python3" >> ${INV_FILE}
+
+echo "## Contents of inv file"
+cat ${INV_FILE}
