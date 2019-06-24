@@ -19,7 +19,7 @@ echo "# Creating cluster-role-binding for tiller"
 kubectl create clusterrolebinding tiller-cluster-rule --clusterrole=cluster-admin --serviceaccount=kube-system:tiller || true
 
 echo "# Deploying tiller"
-helm init --service-account tiller
+helm init --service-account tiller --wait
 
 echo -e "\n## Deploying Nginx Ingress Controller"
 echo "# Add nginx helm repository"
