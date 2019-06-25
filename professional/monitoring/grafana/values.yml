@@ -1,0 +1,18 @@
+sidecar:
+  image: k8sadmin/k8s-sidecar:latest
+  imagePullPolicy: Always
+  #resources:
+  #  limits:
+  #    cpu: 100m
+  #    memory: 100Mi
+  #  requests:
+  #    cpu: 50m
+  #    memory: 50Mi
+  datasources:
+    enabled: true
+    label: grafana_datasource
+
+service:
+  type: NodePort
+  nodePort: 30003
+  targetPort: 3000

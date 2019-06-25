@@ -1,0 +1,43 @@
+#! /bin/bash -e
+
+# Monitoring
+kubectl apply -f monitoring/namespace.yml
+helm install stable/prometheus \
+    -f monitoring/prometheus/values.yaml \
+    --namespace monitoring \
+    --name prometheus
+
+kubectl apply -f monitoring/grafana/config.yml
+helm install stable/grafana \
+    -f monitoring/grafana/values.yml \
+    --namespace monitoring \
+    --name grafana
+
+pass=$(kubectl get secret  --namespace monitoring grafana -o jsonpath="{.data.admin-password}" | base64 --decode)
+
+kubectl delete pv --all -n monitoring
+kubectl delete pvc --all -n monitoring
+
+echo "## Waiting for 5 seconds to delete pvs"
+sleep 5
+kubectl apply -f monitoring/prometheus/prometheus-pv.yaml
+kubectl apply -f monitoring/prometheus/prometheus-pvc.yaml
+
+kubectl apply -f monitoring/prometheus/alertmanager-pv.yaml
+kubectl apply -f monitoring/prometheus/alertmanager-pvc.yaml
+
+echo "## Open Grafana and Prometheus ports for k8s nodes"
+gcloud compute firewall-rules create allow-30001 \
+  --allow tcp:30001 \
+  --network mstakx-test \
+  --source-ranges 0.0.0.0/0
+
+gcloud compute firewall-rules create allow-30003 \
+  --allow tcp:30003 \
+  --network mstakx-test \
+  --source-ranges 0.0.0.0/0
+
+echo "## Login to Grafana with below creds :"
+echo "Url  : http://<K8S-WORKER-PUBLIC-IP>:30003/"
+echo "user : admin"
+echo "pass : ${pass}"
