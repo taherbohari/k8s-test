@@ -1,0 +1,5 @@
+#!/bin/bash -e
+
+NETWORK="mstakx-test"
+PROM_PORT=30001
+GRAFANA_PORT=30003

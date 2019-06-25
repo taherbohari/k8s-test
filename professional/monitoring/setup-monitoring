@@ -13,7 +13,7 @@ helm install stable/grafana \
     --namespace monitoring \
     --name grafana
 
-pass=$(kubectl get secret  --namespace monitoring grafana -o jsonpath="{.data.admin-password}" | base64 --decode)
+pass=$(kubectl get secret --namespace monitoring grafana -o jsonpath="{.data.admin-password}" | base64 --decode)
 
 kubectl delete pv --all -n monitoring
 kubectl delete pvc --all -n monitoring
@@ -27,16 +27,16 @@ kubectl apply -f monitoring/prometheus/alertmanager-pv.yaml
 kubectl apply -f monitoring/prometheus/alertmanager-pvc.yaml
 
 echo "## Open Grafana and Prometheus ports for k8s nodes"
-gcloud compute firewall-rules create allow-30001 \
-  --allow tcp:30001 \
+gcloud compute firewall-rules create allow-${PROM_PORT} \
+  --allow tcp:${PROM_PORT} \
   --target-tags worker \
-  --network mstakx-test \
+  --network ${NETWORK} \
   --source-ranges 0.0.0.0/0
 
-gcloud compute firewall-rules create allow-30003 \
-  --allow tcp:30003 \
+gcloud compute firewall-rules create allow-${GRAFANA_PORT} \
+  --allow tcp:${GRAFANA_PORT} \
   --target-tags worker \
-  --network mstakx-test \
+  --network ${NETWORK} \
   --source-ranges 0.0.0.0/0
 
 echo "## Login to Grafana with below creds :"
