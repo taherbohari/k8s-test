@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    run: color-app
+  name: color-app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      run: color-app
+  template:
+    metadata:
+      labels:
+        run: color-app
+    spec:
+      containers:
+      - image: k8sadmin/blue_green:2.0
+        imagePullPolicy: Always
+        name: color-app
+        ports:
+        - name: http
+          containerPort: 80

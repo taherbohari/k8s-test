@@ -1,0 +1,25 @@
+#!/bin/bash -e
+
+echo "## Create namespace blue"
+kubectl create ns blue || true
+
+echo "## color-app deployment"
+kubectl apply -f blue/color-app.yaml -n blue
+
+echo "## color-app service"
+kubectl apply -f blue/color-svc.yaml -n blue
+
+echo "## create firewall rule to enable node port"
+gcloud compute firewall-rules create allow-30011 \
+  --allow tcp:30011 \
+  --target-tags worker \
+  --network kubernetes-the-hard-way \
+  --source-ranges 0.0.0.0/0
+
+echo "## check if color-app pods are running"
+kubectl get pods -l run=color-app -n blue
+
+echo "## access color-app on below url"
+ext_ip=$(gcloud compute instances describe worker-0 --format='get(networkInterfaces[0].accessConfigs[0].natIP)')
+echo "http://${ext_ip}:30011/"
+echo "## Please check if you get BLUE color background"

@@ -1,0 +1,10 @@
+#!/bin/bash -e
+
+echo "## hello-world-canary deployment"
+kubectl apply -f hello-world-canary.yaml
+
+echo "## wait for few seconds to start hello-world-canary pods"
+sleep 5
+
+echo "## check if hello-world-canary pods are running"
+kubectl get pods -n development -l run=hello-world -l track=canary

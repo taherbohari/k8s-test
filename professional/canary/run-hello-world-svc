@@ -1,0 +1,11 @@
+#!/bin/bash -e
+
+PUB_IP=$(gcloud compute instances describe worker-0 --format='get(networkInterfaces[0].accessConfigs[0].natIP)')
+NODE_PORT=30010
+
+echo "## Press ctrl+c to exit"
+while true;
+do
+    sleep 1;
+    curl http://${PUB_IP}:${NODE_PORT}/
+done

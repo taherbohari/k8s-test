@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    run: hello-world
+  name: hello-world
+  namespace: development
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+    targetPort: http
+    nodePort: 30010
+  selector:
+    run: hello-world
+  type: NodePort

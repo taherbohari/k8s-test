@@ -1,0 +1,17 @@
+#!/bin/bash -e
+
+echo "## hello-world deployment"
+kubectl apply -f hello-world.yaml
+
+echo "## hello-world service"
+kubectl apply -f hello-world-svc.yaml
+
+echo "## create firewall rule to enable node port"
+gcloud compute firewall-rules create allow-30010 \
+  --allow tcp:30010 \
+  --target-tags worker \ 
+  --network mstakx-test \
+  --source-ranges 0.0.0.0/0
+
+echo "## check if hello-world pods are running"
+kubectl get pods -n development -l run=hello-world

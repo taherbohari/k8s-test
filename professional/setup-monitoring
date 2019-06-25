@@ -29,11 +29,13 @@ kubectl apply -f monitoring/prometheus/alertmanager-pvc.yaml
 echo "## Open Grafana and Prometheus ports for k8s nodes"
 gcloud compute firewall-rules create allow-30001 \
   --allow tcp:30001 \
+  --target-tags worker \
   --network mstakx-test \
   --source-ranges 0.0.0.0/0
 
 gcloud compute firewall-rules create allow-30003 \
   --allow tcp:30003 \
+  --target-tags worker \
   --network mstakx-test \
   --source-ranges 0.0.0.0/0
 
