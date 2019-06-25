@@ -1,0 +1,8 @@
+#!/bin/bash -e
+
+
+pause(){
+  secs=$1
+  echo "## Work in progress. Wait for few seconds..."
+  sleep ${secs}
+}

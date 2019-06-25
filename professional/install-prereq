@@ -1,0 +1,18 @@
+#!/bin/bash -e
+
+REGION=${1:?"asia-south1"}
+ZONE=${2:?"asia-south1-c"}
+
+echo "## Installing java-8"
+apt update
+apt install -y openjdk-8-jdk
+
+echo "## Install ansible"
+apt install -y software-properties-common
+apt-add-repository ppa:ansible/ansible
+apt update
+apt install -y ansible
+
+echo "## Setup gcloud"
+gcloud config set compute/region ${REGION}
+gcloud config set compute/zone ${ZONE}
