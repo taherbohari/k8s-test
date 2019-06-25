@@ -39,7 +39,9 @@ gcloud compute firewall-rules create allow-${GRAFANA_PORT} \
   --network ${NETWORK} \
   --source-ranges 0.0.0.0/0
 
+PUB_IP=$(gcloud compute instances describe worker-0 --format='get(networkInterfaces[0].accessConfigs[0].natIP)')
+
 echo "## Login to Grafana with below creds :"
-echo "Url  : http://<K8S-WORKER-PUBLIC-IP>:30003/"
+echo "Url  : http://${PUB_IP}:${GRAFANA_PORT}/"
 echo "user : admin"
 echo "pass : ${pass}"
