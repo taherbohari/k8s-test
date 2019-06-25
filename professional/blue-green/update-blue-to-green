@@ -1,5 +1,7 @@
 #!/bin/bash -e
 
+source vars
+
 echo "## Updating color app to point to green version"
 kubectl set image deployment/color-app color-app=k8sadmin/blue_green:2.0 -n blue
 
@@ -10,6 +12,5 @@ echo "## check if color-app pods are running"
 kubectl get pods -l run=color-app -n blue
 
 echo "## access new color-app on below url"
-ext_ip=$(gcloud compute instances describe worker-0 --format='get(networkInterfaces[0].accessConfigs[0].natIP)')
-echo "http://${ext_ip}:30011/"
+echo "http://${PUB_IP}:${BLUE_PORT}/"
 echo "## Please check if you get GREEN color background"

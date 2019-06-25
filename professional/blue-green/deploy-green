@@ -1,5 +1,7 @@
 #!/bin/bash -e
 
+source vars
+
 echo "## Create namespace green"
 kubectl create ns green || true
 
@@ -10,16 +12,15 @@ echo "## color-app service"
 kubectl apply -f green/color-svc.yaml -n green
 
 echo "## create firewall rule to enable node port"
-gcloud compute firewall-rules create allow-30012 \
-  --allow tcp:30012 \
+gcloud compute firewall-rules create allow-${GREEN_PORT} \
+  --allow tcp:${GREEN_PORT} \
   --target-tags worker \
-  --network kubernetes-the-hard-way \
+  --network ${NETWORK} \
   --source-ranges 0.0.0.0/0
 
 echo "## check if color-app pods are running"
 kubectl get pods -l run=color-app -n green
 
 echo "## access color-app on below url"
-ext_ip=$(gcloud compute instances describe worker-0 --format='get(networkInterfaces[0].accessConfigs[0].natIP)')
-echo "http://${ext_ip}:30012/"
+echo "http://${PUB_IP}:${GREEN_PORT}/"
 echo "## Please check if you get GREEN color background"
