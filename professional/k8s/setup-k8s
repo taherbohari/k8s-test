@@ -2,6 +2,7 @@
 
 NODE_ARR=$(kubectl get nodes -o jsonpath='{.items[*].metadata.name}')
 INV_FILE="/tmp/inv"
+PRIVATE_KEY="${HOME}/.ssh/google_compute_engine"
 
 echo "[nodes]" > ${INV_FILE}
 
@@ -15,3 +16,6 @@ echo "ansible_python_interpreter=/usr/bin/python3" >> ${INV_FILE}
 
 echo "## Contents of inv file"
 cat ${INV_FILE}
+
+echo "## Installing prerequisites for jenkins"
+ansible-playbook -i ${INV_FILE} k8s-prereq.yaml --private-key=${PRIVATE_KEY}

@@ -1,0 +1,9 @@
+#!/bin/bash
+
+ZONE="asia-southeast1-b"
+MACHINE_TYPE="n1-standard-1"
+INV_FILE="/tmp/inv"
+PRIVATE_KEY="${HOME}/.ssh/google_compute_engine"
+
+EXTERNAL_IP=$(gcloud compute instances describe jenkins --zone=${ZONE} --format='get(networkInterfaces[0].accessConfigs[0].natIP)')
+JENKINS_URL="http://${EXTERNAL_IP}:8080"

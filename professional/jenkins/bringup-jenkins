@@ -2,8 +2,8 @@
 
 echo "## Bringup jenkins instance"
 gcloud compute instances create jenkins \
-	--zone=asia-southeast1-b \
-	--machine-type=n1-standard-1 \
+	--zone=${ZONE} \
+	--machine-type=${MACHINE_TYPE} \
 	--can-ip-forward \
 	--subnet=default \
 	--metadata=Name=Jenkins \

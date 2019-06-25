@@ -1,0 +1,16 @@
+#!/bin/bash -e
+
+source vars
+
+echo "## Generating jenkins inventory"
+echo "[jenkins]" > ${INV_FILE}
+echo ${EXTERNAL_IP} >> ${INV_FILE} 
+
+echo "[all:vars]" >> ${INV_FILE}
+echo "ansible_python_interpreter=/usr/bin/python3" >> ${INV_FILE}
+
+echo "## Contents of inventory file"
+cat ${INV_FILE}
+
+echo "## Installing prerequisites for jenkins"
+ansible-playbook -i ${INV_FILE} jenkins-prereq.yaml --private-key=${PRIVATE_KEY}
