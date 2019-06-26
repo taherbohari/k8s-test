@@ -16,12 +16,12 @@
 #### Setup Local Instance
 - Run install-prereq script
 ```
-sudo ./install-prereq
+sudo ./professional/install-prereq
 ```
 #### Setup Kubernetes
 - Bringup k8s vms on gcloud
 ```
-./k8s/bringup-k8s-cluster
+./professional/k8s/bringup-k8s-cluster
 ```
 - ssh to controller-0 instance. This is just to fetch gcloud ssh keys on your local instance.
 ```
@@ -31,11 +31,11 @@ gcloud compute ssh controller-0
 
 - Run k8s prereq
 ```
-./k8s/setup-k8s
+./professional/k8s/setup-k8s
 ```
 - Create kubeadm config
 ```
-./k8s/create-kubeadm-config
+./professional/k8s/create-kubeadm-config
 ```
 ###### Setup controller-0 instance. Below steps to run on controller-0 instance
 - ssh to controller-0 instance
@@ -83,32 +83,32 @@ sudo kubeadm join <CONTROL_PLANE_ENDPOINT> --token <TOKEN> \
 ###### Setup your local instance
 - Setup your local instance to talk to your kubernetes cluster
 ```
-sudo ./setup-local-k8s-access
+sudo ./professional/setup-local-k8s-access
 ```
 - Deploy guestbook application. This step will create development namespace and deploy guestbook app in the same.
 ```
-sudo ./k8s/deploy-guestbook-app
+sudo ./professional/k8s/deploy-guestbook-app
 ```
 - Deploy nginx app which will be used in later part (jenkins)
 ```
-./k8s/deploy-nginx-app
+./professional/k8s/deploy-nginx-app
 ```
 - Test nginx app. Check message.
 ```
-./k8s/test-nginx-app
+./professional/k8s/test-nginx-app
 ```
 - Setup helm on local instance
 ```
-sudo ./k8s/setup-helm
+sudo ./professional/k8s/setup-helm
 ```
 #### Setup Jenkins
 - Bringup jenkins instance on gcloud
 ```
-./jenkins/bringup-jenkins
+./professional/jenkins/bringup-jenkins
 ```
 - Install Jenkins prereq
 ```
-./jenkins/setup-jenkins
+./professional/jenkins/setup-jenkins
 ```
 - Login to jenkins now. Pick jenknis url from console output of last command.
 
@@ -120,7 +120,7 @@ sudo ./k8s/setup-helm
 	- Refer below url for details : https://dzone.com/articles/adding-a-github-webhook-in-your-jenkins-pipeline
 - Import jobs into jenkins
 ```
-./jenkins/import-jobs
+./professional/jenkins/import-jobs
 ```
 - Access k8sadmin Github account and Update webhook of k8sadmin/custom_nginx project.
 	- Go to Project Settings -> WebHook -> Add Webhook
@@ -137,14 +137,14 @@ sudo ./k8s/setup-helm
 
   - Test nginx app. Now app should show updated message.
   ```
-  ./k8s/test-nginx-app
+  ./professional/k8s/test-nginx-app
   ```
 - Now run hello-world-helm jenkins job to deploy helm app in k8s
 
 #### Setup Monitoring
 - Setup monitoring
 ```
-./monitoring/setup-monitoring
+./professional/monitoring/setup-monitoring
 ```
 - Login to Grafana. Check console output of above command for credentials.
 	- In the left hand menu, Click on "+" -> Import
@@ -154,22 +154,22 @@ sudo ./k8s/setup-helm
 #### Canary Deployment
 - Deploy hello world app
 ```
-./canary/deploy-hello-world
+./professional/canary/deploy-hello-world
 ```
 - deploy hello world canary
 ```
-./canary/deploy-hello-world-canary
+./professional/canary/deploy-hello-world-canary
 ```
 - check canary deployments
 ```
-./canary/run-hello-world-svc
+./professional/canary/run-hello-world-svc
 ```
 *RESULT :* You will see both versions populated of hello-world app
 
 #### Blue Green Deployment
 - Deploy color-app with blue color in blue namespace
 ```
-./blue-green/deploy-blue
+./professional/blue-green/deploy-blue
 ```
 - Access blue color-app on above url. Check console output of above command.
 
@@ -177,7 +177,7 @@ sudo ./k8s/setup-helm
 
 - Deploy color-app with green color in green namespace
 ```
-./blue-green/deploy-green
+./professional/blue-green/deploy-green
 ```
 - Access green color-app on above url. Check console output of above command.
 
@@ -185,7 +185,7 @@ sudo ./k8s/setup-helm
 
 - Update color app deployment
 ```
-./blue-green/update-blue-to-green
+./professional/blue-green/update-blue-to-green
 ```
 - Access color-app using above url. Check console output of above command.
 
