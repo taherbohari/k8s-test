@@ -97,6 +97,13 @@ Run below command as root. Refer the console output saved from above step
 sudo kubeadm join <CONTROL_PLANE_ENDPOINT> --token <TOKEN> \
     --discovery-token-ca-cert-hash <CERT>
 ```
+- Once all nodes have joined the cluster. Exit from worker nodes and check the status of nodes on controller-0 instance
+```
+gcloud compute ssh controller-0
+kubectl get nodes
+exit
+```
+
 ###### Setup your local instance
 - Setup your local instance to talk to your kubernetes cluster
 ```
