@@ -9,8 +9,9 @@ kubectl create deployment mynginx --image=k8sadmin/mynginx -n development
 echo "## Expose nginx deployment as service"
 kubectl expose deployment/mynginx --port=80 --name=mynginxsvc --type=NodePort -n development
 
+SVC_PORT=$(kubectl get -n development  -o jsonpath="{.spec.ports[0].nodePort}" services mynginxsvc)
 echo "## create firewall rule to enable node port"
-gcloud compute firewall-rules create allow-${CANARY_PORT} \
+gcloud compute firewall-rules create allow-${SVC_PORT} \
   --allow tcp:${SVC_PORT} \
   --target-tags worker \
   --network ${NETWORK} \
