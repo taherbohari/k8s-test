@@ -8,5 +8,5 @@ echo "## Downloading jenkins-cli.jar"
 wget ${JENKINS_URL}/jnlpJars/jenkins-cli.jar
 
 echo "## Importing jobs into jenkins"
-java -jar jenkins-cli.jar -s ${JENKINS_URL} create-job hello-world-helm  < jobs/hello-world-helm.xml
-java -jar jenkins-cli.jar -s ${JENKINS_URL} create-job mynginx  < jobs/mynginx.xml
+java -jar jenkins-cli.jar -s ${JENKINS_URL} create-job hello-world-helm  < ${SCRIPTPATH}/jobs/hello-world-helm.xml
+java -jar jenkins-cli.jar -s ${JENKINS_URL} create-job mynginx  < ${SCRIPTPATH}/jobs/mynginx.xml
