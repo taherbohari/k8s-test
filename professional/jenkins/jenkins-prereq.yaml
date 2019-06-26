@@ -7,6 +7,21 @@
       state: present
       update_cache: true
 
+  - name: Ensure group docker exists
+    group:
+      name: docker
+      state: present
+
+  - name: Add user jenkins in docker group
+    user:
+      name: jenkins
+      group: docker
+
+  - name: Add user ubuntu in docker group
+    user:
+      name: ubuntu
+      group: docker
+
   - name: start docker and enable
     systemd:
       state: started
