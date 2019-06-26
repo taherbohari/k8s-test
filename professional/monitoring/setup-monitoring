@@ -1,15 +1,19 @@
 #! /bin/bash -e
 
+SCRIPT=$(readlink -f "$0")
+SCRIPTPATH=$(dirname "$SCRIPT")
+source ${SCRIPTPATH}/vars
+
 # Monitoring
-kubectl apply -f monitoring/namespace.yml
+kubectl apply -f namespace.yml
 helm install stable/prometheus \
-    -f monitoring/prometheus/values.yaml \
+    -f ${SCRIPTPATH}/prometheus/values.yaml \
     --namespace monitoring \
     --name prometheus
 
 kubectl apply -f monitoring/grafana/config.yml
 helm install stable/grafana \
-    -f monitoring/grafana/values.yml \
+    -f ${SCRIPTPATH}/grafana/values.yml \
     --namespace monitoring \
     --name grafana
 
@@ -20,11 +24,11 @@ kubectl delete pvc --all -n monitoring
 
 echo "## Waiting for 5 seconds to delete pvs"
 sleep 5
-kubectl apply -f monitoring/prometheus/prometheus-pv.yaml
-kubectl apply -f monitoring/prometheus/prometheus-pvc.yaml
+kubectl apply -f ${SCRIPTPATH}/prometheus/prometheus-pv.yaml
+kubectl apply -f ${SCRIPTPATH}/prometheus/prometheus-pvc.yaml
 
-kubectl apply -f monitoring/prometheus/alertmanager-pv.yaml
-kubectl apply -f monitoring/prometheus/alertmanager-pvc.yaml
+kubectl apply -f ${SCRIPTPATH}/prometheus/alertmanager-pv.yaml
+kubectl apply -f ${SCRIPTPATH}/prometheus/alertmanager-pvc.yaml
 
 echo "## Open Grafana and Prometheus ports for k8s nodes"
 gcloud compute firewall-rules create allow-${PROM_PORT} \
