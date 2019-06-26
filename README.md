@@ -141,6 +141,12 @@ sudo ./professional/k8s/setup-helm
 - Login to jenkins now. Pick jenknis url from console output of last command.
 
 *NOTE :* Follow the steps on UI to login and install default plugins on jenkins.
+
+- Get the jenkins password from file location present on jenkins instance
+```
+gcloud compute ssh jenkins --zone=asia-southeast1-b
+sudo cat /var/lib/jenkins/secrets/initialAdminPassword
+```
 - Configure Jenkins.
 	- Go to Manage Jenkins -> Configure System
 	- Scroll down and you will find the GitHub Pull Requests checkbox. 
