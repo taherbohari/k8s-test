@@ -1,9 +1,10 @@
-#!/bin/bash -e
+#!/bin/bash
 
 SCRIPT=$(readlink -f "$0")
 SCRIPTPATH=$(dirname "$SCRIPT")
 source ${SCRIPTPATH}/vars
 echo "## Press ctrl+c to exit"
+echo "##NOTE : You might see Failed to connect message for some time. Be patient"
 while true;
 do
     sleep 1;
