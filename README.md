@@ -72,7 +72,10 @@ kubectl apply -f "https://cloud.weave.works/k8s/net?k8s-version=$(kubectl versio
 ###### Setup remaining controller instances
 
 **NOTE :** Run below step on all remaining controller nodes
-- Now ssh to remaining controller instance and add them to cluster one by one. 
+- Now ssh to controller-1 instance and add them to cluster.
+```
+gcloud compute ssh controller-1
+```
 Run below command as root. Refer the console output saved from above step
 ```
   sudo kubeadm join <CONTROL_PLANE_ENDPOINT> --token <TOKEN> \
