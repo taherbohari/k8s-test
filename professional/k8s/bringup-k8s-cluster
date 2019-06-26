@@ -1,7 +1,8 @@
 #!/bin/bash -e
 
-BASEDIR=$(dirname "$0")
-source ${BASEDIR}/common
+SCRIPT=$(readlink -f "$0")
+SCRIPTPATH=$(dirname "$SCRIPT")
+source ${SCRIPTPATH}/common
 
 echo "## Create the ${NETWORK} custom VPC network"
 gcloud compute networks create ${NETWORK} --subnet-mode custom
