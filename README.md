@@ -13,6 +13,14 @@
 - Docker Hub Account <Account Details Given In Mail>
 - Github account <Account Details Given In Mail>
 
+#### Defaults Taken
+- Kubernetes
+  - Region : asia-south1
+  - Zone : asia-south1-c
+  - Network Name : mstakx-test
+- Jenkins
+  - Region : asia-southeast1-b
+
 #### Setup Local Instance
 - Run install-prereq script
 ```
