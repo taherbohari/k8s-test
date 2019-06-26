@@ -1,6 +1,8 @@
 #!/bin/bash -e
 
-source common
+CRIPT=$(readlink -f "$0")
+SCRIPTPATH=$(dirname "$SCRIPT")
+source ${SCRIPTPATH}/common
 KUBEADM_CONFIG="/tmp/kubeadm.yaml"
 
 echo "## This step will create kubeadm config file : kubeadm.yaml"
