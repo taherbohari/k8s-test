@@ -18,6 +18,8 @@
   - Region : asia-south1
   - Zone : asia-south1-c
   - Network Name : mstakx-test
+  - Master Node Count : 2 (Free tier only supports max 8 CPUS in a region, so 4 VM's each with 2 vcpus)
+  - Worker Node Count : 2
 - Jenkins
   - Region : asia-southeast1-b
 
