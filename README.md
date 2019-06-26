@@ -150,8 +150,9 @@ sudo cat /var/lib/jenkins/secrets/initialAdminPassword
 - Configure Jenkins.
 	- Go to Manage Jenkins -> Configure System
 	- Scroll down and you will find the GitHub Pull Requests checkbox. 
-  - In the *Published Jenkins URL*, add the repository link *WebHook url* : http://<JENKINS_PUBLIC_IP>:8080/github-webhook/
+        - In the *Published Jenkins URL*, add the repository link *WebHook url* : http://<JENKINS_PUBLIC_IP>:8080/github-webhook/
 	- Refer below url for details : https://dzone.com/articles/adding-a-github-webhook-in-your-jenkins-pipeline
+	- Manage Jenkins -> Configure Global Security -> Authorization -> Anyone can do anything (check this radio button)
 - Import jobs into jenkins
 ```
 ./professional/jenkins/import-jobs
