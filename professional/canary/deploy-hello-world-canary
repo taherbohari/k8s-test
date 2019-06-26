@@ -1,7 +1,10 @@
 #!/bin/bash -e
 
+SCRIPT=$(readlink -f "$0")
+SCRIPTPATH=$(dirname "$SCRIPT")
+
 echo "## hello-world-canary deployment"
-kubectl apply -f manifests/hello-world-canary.yaml
+kubectl apply -f ${SCRIPTPATH}/manifests/hello-world-canary.yaml
 
 echo "## wait for few seconds to start hello-world-canary pods"
 sleep 5
