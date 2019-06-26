@@ -85,7 +85,11 @@ Run below command as root. Refer the console output saved from above step
 ###### Setup remaining worker instances
 
 **NOTE :** Run below step on all worker nodes
-- Now ssh to remaining worker nodes and add them to cluster. 
+- Now ssh to both worker nodes : worker-0, worker-1 and add them to cluster.
+```
+gcloud compute ssh worker-0
+gcloud compute ssh worker-0
+```
 Run below command as root. Refer the console output saved from above step
 
 **NOTE :** Do not include *--experimental-control-plane*  option for worker nodes 
