@@ -1,6 +1,6 @@
 #!/bin/bash
 
-NODE_ARR=$(kubectl get nodes -o jsonpath='{.items[*].metadata.name}')
+NODE_ARR=$(gcloud --format="value(networkInterfaces[0].accessConfigs[0].natIP)"  compute instances list  --filter="zone:(asia-south1-c)" | tr '\n' ' ')
 INV_FILE="/tmp/inv"
 PRIVATE_KEY="${HOME}/.ssh/google_compute_engine"
 SCRIPT=$(readlink -f "$0")
@@ -9,8 +9,7 @@ SCRIPTPATH=$(dirname "$SCRIPT")
 echo "[nodes]" > ${INV_FILE}
 
 for node in ${NODE_ARR};do
-  ext_ip=$(gcloud compute instances describe ${node} --format='get(networkInterfaces[0].accessConfigs[0].natIP)')
-  echo ${ext_ip} >> ${INV_FILE} 
+  echo ${node} >> ${INV_FILE}
 done
 
 echo "[all:vars]" >> ${INV_FILE}
