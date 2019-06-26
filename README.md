@@ -157,11 +157,12 @@ sudo cat /var/lib/jenkins/secrets/initialAdminPassword
 ```
 ./professional/jenkins/import-jobs
 ```
-- Access k8sadmin Github account and Update webhook of k8sadmin/custom_nginx project.
+- Access **k8sadmin** Github account. Access details provided.
+	- Update webhook of k8sadmin/custom_nginx project
 	- Go to Project Settings -> WebHook -> Add Webhook
 	- *WebHook :* http://<JENKINS_PUBLIC_IP>:8080/github-webhook/
 - Commands to test CI/CD Pipeline using jenkins
-	- Clone custom_nginx repo and update index.html 
+	- Clone custom_nginx repo and update index.html
   ```
   git clone https://github.com/k8sadmin/custom_nginx.git
   cd custom_nginx
