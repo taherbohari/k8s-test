@@ -14,6 +14,7 @@ echo "ansible_python_interpreter=/usr/bin/python3" >> ${INV_FILE}
 echo "## Contents of inventory file"
 cat ${INV_FILE}
 
+export ANSIBLE_HOST_KEY_CHECKING=False
 echo "## Installing prerequisites for jenkins"
 ansible-playbook -i ${INV_FILE} jenkins-prereq.yaml --private-key=${PRIVATE_KEY}
 
