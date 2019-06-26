@@ -88,7 +88,7 @@ Run below command as root. Refer the console output saved from above step
 - Now ssh to both worker nodes : worker-0, worker-1 and add them to cluster.
 ```
 gcloud compute ssh worker-0
-gcloud compute ssh worker-0
+gcloud compute ssh worker-1
 ```
 Run below command as root. Refer the console output saved from above step
 
@@ -105,6 +105,10 @@ exit
 ```
 
 ###### Setup your local instance
+- Add remaining controller instance to the kubernetes target pool
+```
+gcloud compute target-pools add-instances kubernetes-target-pool --instances controller-1
+```
 - Setup your local instance to talk to your kubernetes cluster
 ```
 ./professional/setup-local-k8s-access
