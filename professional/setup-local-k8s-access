@@ -1,0 +1,13 @@
+#!/bin/bash -e
+
+echo "## Creating .kube dir"
+mkdir -p ${HOME}/.kube
+
+echo "## Fetch kube config file from controller-0"
+gcloud compute scp controller-0:/home/ubuntu/.kube/config ${HOME}/.kube/config
+
+echo "## Change owner of kube config file"
+sudo chown $(id -u):$(id -g) $HOME/.kube/config
+
+echo "## Check k8s access"
+kubectl get nodes

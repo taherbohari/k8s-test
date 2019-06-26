@@ -1,0 +1,11 @@
+#!/bin/bash -e
+
+
+SVC_PORT=$(kubectl get svc mynginxsvc -o=jsonpath='{.spec.ports[*].nodePort}')
+
+echo "## Press ctrl+c to exit"
+while true;
+do
+    sleep 1;
+    curl http://${PUB_IP}:${SVC_PORT}/
+done

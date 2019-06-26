@@ -1,5 +1,6 @@
 #!/bin/bash -e
 
+NETWORK="mstakx-test"
 
 pause(){
   secs=$1

@@ -1,0 +1,17 @@
+#!/bin/bash -e
+
+NETWORK="mstakx-test"
+PUB_IP=$(gcloud compute instances describe worker-0 --format='get(networkInterfaces[0].accessConfigs[0].natIP)')
+
+echo "## Deploy nginx app"
+kubectl create deployment mynginx --image=k8sadmin/mynginx -n development
+
+echo "## Expose nginx deployment as service"
+kubectl expose deployment/mynginx --port=80 --name=mynginxsvc --type=NodePort -n development
+
+echo "## create firewall rule to enable node port"
+gcloud compute firewall-rules create allow-${CANARY_PORT} \
+  --allow tcp:${SVC_PORT} \
+  --target-tags worker \
+  --network ${NETWORK} \
+  --source-ranges 0.0.0.0/0

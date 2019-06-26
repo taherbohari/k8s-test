@@ -2,37 +2,37 @@
 
 source common
 
-echo "## Create the mstakx-test custom VPC network"
-gcloud compute networks create mstakx-test --subnet-mode custom
+echo "## Create the ${NETWORK} custom VPC network"
+gcloud compute networks create ${NETWORK} --subnet-mode custom
 
-echo "## Create the kubernetes subnet in the mstakx-test VPC network"
+echo "## Create the kubernetes subnet in the ${NETWORK} VPC network"
 gcloud compute networks subnets create kubernetes \
-  --network mstakx-test \
+  --network ${NETWORK} \
   --range 10.240.0.0/24
   
 echo "## Create a firewall rule that allows internal communication across all protocols"
-gcloud compute firewall-rules create mstakx-test-allow-internal \
+gcloud compute firewall-rules create ${NETWORK}-allow-internal \
   --allow tcp,udp,icmp \
-  --network mstakx-test \
+  --network ${NETWORK} \
   --source-ranges 10.240.0.0/24,10.200.0.0/16
   
 echo "## Create a firewall rule that allows external SSH, ICMP, and HTTPS"
-gcloud compute firewall-rules create mstakx-test-allow-external \
+gcloud compute firewall-rules create ${NETWORK}-allow-external \
   --allow tcp:22,tcp:6443,icmp \
-  --network mstakx-test \
+  --network ${NETWORK} \
   --source-ranges 0.0.0.0/0
   
-echo "## List the firewall rules in the mstakx-test VPC network"
-gcloud compute firewall-rules list --filter="network:mstakx-test"
+echo "## List the firewall rules in the ${NETWORK} VPC network"
+gcloud compute firewall-rules list --filter="network:${NETWORK}"
 
 echo "## Allocate a static IP address that will be attached to the external load balancer fronting the Kubernetes API Servers"
-gcloud compute addresses create mstakx-test \
+gcloud compute addresses create ${NETWORK} \
   --region $(gcloud config get-value compute/region)
 
 pause 10
 
-echo "## Verify the mstakx-test static IP address was created in your default compute region"
-gcloud compute addresses list --filter="name=('mstakx-test')"
+echo "## Verify the ${NETWORK} static IP address was created in your default compute region"
+gcloud compute addresses list --filter="name=('${NETWORK}')"
 
 echo "## Create three compute instances which will host the Kubernetes control plane"
 for i in 0 1; do
@@ -46,7 +46,7 @@ for i in 0 1; do
     --private-network-ip 10.240.0.1${i} \
     --scopes compute-rw,storage-ro,service-management,service-control,logging-write,monitoring \
     --subnet kubernetes \
-    --tags mstakx-test,controller
+    --tags ${NETWORK},controller
 done
 
 pause 5
@@ -64,13 +64,13 @@ for i in 0 1; do
     --private-network-ip 10.240.0.2${i} \
     --scopes compute-rw,storage-ro,service-management,service-control,logging-write,monitoring \
     --subnet kubernetes \
-    --tags mstakx-test,worker
+    --tags ${NETWORK},worker
 done
 
 pause 5
 
 echo "## Create the external load balancer network resources"
-KUBERNETES_PUBLIC_ADDRESS=$(gcloud compute addresses describe mstakx-test \
+KUBERNETES_PUBLIC_ADDRESS=$(gcloud compute addresses describe ${NETWORK} \
   --region $(gcloud config get-value compute/region) \
   --format 'value(address)')
 
@@ -79,8 +79,8 @@ gcloud compute http-health-checks create kubernetes \
   --host "kubernetes.default.svc.cluster.local" \
   --request-path "/healthz"
 
-gcloud compute firewall-rules create mstakx-test-allow-health-check \
-  --network mstakx-test \
+gcloud compute firewall-rules create ${NETWORK}-allow-health-check \
+  --network ${NETWORK} \
   --source-ranges 209.85.152.0/22,209.85.204.0/22,35.191.0.0/16 \
   --allow tcp
 

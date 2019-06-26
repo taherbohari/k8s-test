@@ -13,6 +13,6 @@ apt-add-repository ppa:ansible/ansible
 apt update
 apt install -y ansible
 
-echo "## Setup gcloud"
+echo "## Setup gcloud region and zone"
 gcloud config set compute/region ${REGION}
 gcloud config set compute/zone ${ZONE}

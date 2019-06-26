@@ -1,0 +1,21 @@
+#!/bin/bash -e
+
+source common
+KUBEADM_CONFIG="/tmp/kubeadm.yaml"
+
+echo "## This step will create kubeadm config file : kubeadm.yaml"
+echo "## and will copy it to controller-0 instance for further setup"
+
+KUBERNETES_PUBLIC_ADDRESS=$(gcloud compute addresses describe ${NETWORK} \
+    --region $(gcloud config get-value compute/region) \
+    --format 'value(address)')
+
+cat > ${KUBEADM_CONFIG} << EOF
+apiVersion: kubeadm.k8s.io/v1beta1
+kind: ClusterConfiguration
+kubernetesVersion: 1.14.0
+controlPlaneEndpoint: "${KUBE_IP}:6443"
+EOF
+
+echo "## SecureCopy the kubeadm config file to controller-0 instance"
+gcloud compute scp ${KUBEADM_CONFIG} controller-0:/home/ubuntu/kubeadm.yaml
