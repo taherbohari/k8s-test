@@ -132,7 +132,7 @@ sudo ./professional/k8s/setup-helm
 #### Setup Jenkins
 - Bringup jenkins instance on gcloud
 ```
-./professional/jenkins/bringup-jenkins <PROJECT_ID>
+./professional/jenkins/bringup-jenkins
 ```
 - Install Jenkins prereq
 ```
