@@ -89,10 +89,9 @@ gcloud compute firewall-rules create ${NETWORK}-allow-health-check \
 gcloud compute target-pools create kubernetes-target-pool \
   --http-health-check kubernetes
 
-for i in 0 1; do
-  gcloud compute target-pools add-instances kubernetes-target-pool \
-    --instances controller-${i}
-done
+#will add controller-1 instance after k8s setup done
+gcloud compute target-pools add-instances kubernetes-target-pool \
+  --instances controller-0
 
 gcloud compute forwarding-rules create kubernetes-forwarding-rule \
   --address ${KUBERNETES_PUBLIC_ADDRESS} \
