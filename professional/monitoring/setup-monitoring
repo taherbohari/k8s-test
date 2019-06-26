@@ -5,7 +5,7 @@ SCRIPTPATH=$(dirname "$SCRIPT")
 source ${SCRIPTPATH}/vars
 
 # Monitoring
-kubectl apply -f namespace.yml
+kubectl apply -f ${SCRIPTPATH}/namespace.yml
 helm install stable/prometheus \
     -f ${SCRIPTPATH}/prometheus/values.yaml \
     --namespace monitoring \
