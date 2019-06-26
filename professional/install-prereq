@@ -13,6 +13,20 @@ apt-add-repository ppa:ansible/ansible
 apt update
 apt install -y ansible
 
+echo "## Installing docker"
+apt install docker.io -y
+systemctl start docker
+systemctl enable docker
+
+echo "## Installing kubectl"
+apt-get install -y apt-transport-https curl
+curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
+cat <<EOF >/etc/apt/sources.list.d/kubernetes.list
+deb https://apt.kubernetes.io/ kubernetes-xenial main
+EOF
+apt-get update
+apt-get install -y kubectl=1.14.0-00
+
 echo "## Setup gcloud region and zone"
 gcloud config set compute/region ${REGION}
 gcloud config set compute/zone ${ZONE}
