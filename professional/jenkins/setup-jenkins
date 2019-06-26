@@ -14,3 +14,6 @@ cat ${INV_FILE}
 
 echo "## Installing prerequisites for jenkins"
 ansible-playbook -i ${INV_FILE} jenkins-prereq.yaml --private-key=${PRIVATE_KEY}
+
+echo "## Login to jenkins at below url"
+echo "${JENKINS_URL}"

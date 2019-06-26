@@ -9,7 +9,7 @@ echo "## hello-world service"
 kubectl apply -f manifests/hello-world-svc.yaml
 
 echo "## create firewall rule to enable node port"
-gcloud compute firewall-rules create allow-30010 \
+gcloud compute firewall-rules create allow-${CANARY_PORT} \
   --allow tcp:${CANARY_PORT} \
   --target-tags worker \
   --network ${NETWORK} \
