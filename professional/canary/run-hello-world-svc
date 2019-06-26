@@ -1,6 +1,8 @@
 #!/bin/bash -e
 
-source vars
+CRIPT=$(readlink -f "$0")
+SCRIPTPATH=$(dirname "$SCRIPT")
+source ${SCRIPTPATH}/vars
 echo "## Press ctrl+c to exit"
 while true;
 do

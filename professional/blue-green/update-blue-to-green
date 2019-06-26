@@ -1,6 +1,8 @@
 #!/bin/bash -e
 
-source vars
+SCRIPT=$(readlink -f "$0")
+SCRIPTPATH=$(dirname "$SCRIPT")
+source ${SCRIPTPATH}/vars
 
 echo "## Updating color app to point to green version"
 kubectl set image deployment/color-app color-app=k8sadmin/blue_green:2.0 -n blue

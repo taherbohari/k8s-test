@@ -1,6 +1,8 @@
 #!/bin/bash -e
 
-source vars
+CRIPT=$(readlink -f "$0")
+SCRIPTPATH=$(dirname "$SCRIPT")
+source ${SCRIPTPATH}/vars
 
 echo "## Bringup jenkins instance"
 gcloud compute instances create jenkins \
