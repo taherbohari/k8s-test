@@ -1,7 +1,7 @@
 #!/bin/bash -e
 
-REGION=${1:?"asia-south1"}
-ZONE=${2:?"asia-south1-c"}
+REGION=${1:-"asia-south1"}
+ZONE=${2:-"asia-south1-c"}
 
 echo "## Installing java-8"
 apt update
