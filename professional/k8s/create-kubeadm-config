@@ -16,7 +16,7 @@ cat > ${KUBEADM_CONFIG} << EOF
 apiVersion: kubeadm.k8s.io/v1beta1
 kind: ClusterConfiguration
 kubernetesVersion: 1.14.0
-controlPlaneEndpoint: "${KUBE_IP}:6443"
+controlPlaneEndpoint: "${KUBERNETES_PUBLIC_ADDRESS}:6443"
 EOF
 
 echo "## SecureCopy the kubeadm config file to controller-0 instance"
