@@ -77,7 +77,7 @@ Run below command as root. Refer the console output saved from above step
 
 **NOTE :** Do not include *--experimental-control-plane*  option for worker nodes 
 ```
-sudo kubeadm join 34.93.241.158:6443 --token <TOKEN> \
+sudo kubeadm join <CONTROL_PLANE_ENDPOINT> --token <TOKEN> \
     --discovery-token-ca-cert-hash <CERT>
 ```
 ###### Setup your local instance
@@ -112,7 +112,7 @@ sudo kubeadm join 34.93.241.158:6443 --token <TOKEN> \
 ```
 - Login to jenkins now. Pick jenknis url from console output of last command.
 
-**NOTE :** Follow the steps on UI to login and install default plugins on jenkins.
+*NOTE :* Follow the steps on UI to login and install default plugins on jenkins.
 - Configure Jenkins.
 	- Go to Manage Jenkins -> Configure System
 	- Scroll down and you will find the GitHub Pull Requests checkbox. 
@@ -133,7 +133,7 @@ sudo kubeadm join 34.93.241.158:6443 --token <TOKEN> \
   ## update message string inside 'index.html' file.
   ## commit and push the contents to repo with provided creds
   ```
-  **RESULT:** This will trigger job *mynginx* which will then build new docker image, push it into docker hub and deploy new image into our kubernetes cluster
+  *RESULT:* This will trigger job *mynginx* which will then build new docker image, push it into docker hub and deploy new image into our kubernetes cluster
 
   - Test nginx app. Now app should show updated message.
   ```
@@ -164,7 +164,7 @@ sudo kubeadm join 34.93.241.158:6443 --token <TOKEN> \
 ```
 ./canary/run-hello-world-svc
 ```
-**RESULT :** You will see both versions populated of hello-world app
+*RESULT :* You will see both versions populated of hello-world app
 
 #### Blue Green Deployment
 - Deploy color-app with blue color in blue namespace
@@ -173,7 +173,7 @@ sudo kubeadm join 34.93.241.158:6443 --token <TOKEN> \
 ```
 - Access blue color-app on above url. Check console output of above command.
 
-**RESULT :** You should see the BLUE color screen
+*RESULT :* You should see the BLUE color screen
 
 - Deploy color-app with green color in green namespace
 ```
@@ -181,7 +181,7 @@ sudo kubeadm join 34.93.241.158:6443 --token <TOKEN> \
 ```
 - Access green color-app on above url. Check console output of above command.
 
-**RESULT :** You should see the GREEN color screen
+*RESULT :* You should see the GREEN color screen
 
 - Update color app deployment
 ```
@@ -189,4 +189,4 @@ sudo kubeadm join 34.93.241.158:6443 --token <TOKEN> \
 ```
 - Access color-app using above url. Check console output of above command.
 
-**RESULT :** Initially there was BLUE color screen on this URL, now you should see the GREEN color screen.
+*RESULT :* Initially there was BLUE color screen on this URL, now you should see the GREEN color screen.
