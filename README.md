@@ -8,10 +8,10 @@
   - For Debian/Ubuntu : https://cloud.google.com/sdk/docs/quickstart-debian-ubuntu
   - For macOS : https://cloud.google.com/sdk/docs/quickstart-macos
   - For RedHat and CentOS : https://cloud.google.com/sdk/docs/quickstart-redhat-centos
-- Make sure your current user has passwordless sudo access on your development box
+- ubuntu user with passwordless sudo access on your development box
 - Public internet access
-- Docker Hub Account <Account Details Given>
-- Github account <Account Details Given>
+- Docker Hub Account <Account Details Given In Mail>
+- Github account <Account Details Given In Mail>
 
 #### Setup Local Instance
 - Run install-prereq script
