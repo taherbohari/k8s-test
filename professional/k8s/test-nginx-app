@@ -1,6 +1,6 @@
 #!/bin/bash -e
 
-
+PUB_IP=$(gcloud compute instances describe worker-0 --format='get(networkInterfaces[0].accessConfigs[0].natIP)')
 SVC_PORT=$(kubectl get svc mynginxsvc -o=jsonpath='{.spec.ports[*].nodePort}')
 
 echo "## Press ctrl+c to exit"
