@@ -4,6 +4,9 @@ SCRIPT=$(readlink -f "$0")
 SCRIPTPATH=$(dirname "$SCRIPT")
 source ${SCRIPTPATH}/vars
 
+EXTERNAL_IP=$(gcloud compute instances describe jenkins --zone=${ZONE} --format='get(networkInterfaces[0].accessConfigs[0].natIP)')
+JENKINS_URL="http://${EXTERNAL_IP}:8080"
+
 echo "## Generating jenkins inventory"
 echo "[jenkins]" > ${INV_FILE}
 echo ${EXTERNAL_IP} >> ${INV_FILE} 
