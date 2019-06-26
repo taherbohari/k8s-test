@@ -107,11 +107,11 @@ exit
 ###### Setup your local instance
 - Setup your local instance to talk to your kubernetes cluster
 ```
-sudo ./professional/setup-local-k8s-access
+./professional/setup-local-k8s-access
 ```
 - Deploy guestbook application. This step will create development namespace and deploy guestbook app in the same.
 ```
-sudo ./professional/k8s/deploy-guestbook-app
+./professional/k8s/deploy-guestbook-app
 ```
 - Deploy nginx app which will be used in later part (jenkins)
 ```
