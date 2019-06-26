@@ -3,9 +3,10 @@
 SCRIPT=$(readlink -f "$0")
 SCRIPTPATH=$(dirname "$SCRIPT")
 source ${SCRIPTPATH}/vars
+PROJECT=${1:?"Please provide project id"}
 
 echo "## Bringup jenkins instance"
-gcloud compute instances create jenkins \
+gcloud compute --project ${PROJECT} instances create jenkins \
 	--zone=${ZONE} \
 	--machine-type=${MACHINE_TYPE} \
 	--can-ip-forward \
