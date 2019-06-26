@@ -1,4 +1,4 @@
-#!/bin/bash -e
+#!/bin/bash
 
 guestbook_app_deployment(){
 
