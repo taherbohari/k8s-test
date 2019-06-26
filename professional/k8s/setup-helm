@@ -1,4 +1,4 @@
-#!/bin/bash -e
+#!/bin/bash
 
 echo -e "\n## Installing helm client on your local instance"
 curl -L https://git.io/get_helm.sh | bash
