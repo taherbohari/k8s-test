@@ -16,7 +16,7 @@
 #### Setup Local Instance
 - Run install-prereq script
 ```
-./install-prereq
+sudo ./install-prereq
 ```
 #### Setup Kubernetes
 - Bringup k8s vms on gcloud
@@ -83,11 +83,11 @@ sudo kubeadm join <CONTROL_PLANE_ENDPOINT> --token <TOKEN> \
 ###### Setup your local instance
 - Setup your local instance to talk to your kubernetes cluster
 ```
-./setup-local-k8s-access
+sudo ./setup-local-k8s-access
 ```
 - Deploy guestbook application. This step will create development namespace and deploy guestbook app in the same.
 ```
-./k8s/deploy-guestbook-app
+sudo ./k8s/deploy-guestbook-app
 ```
 - Deploy nginx app which will be used in later part (jenkins)
 ```
@@ -99,7 +99,7 @@ sudo kubeadm join <CONTROL_PLANE_ENDPOINT> --token <TOKEN> \
 ```
 - Setup helm on local instance
 ```
-./k8s/setup-helm
+sudo ./k8s/setup-helm
 ```
 #### Setup Jenkins
 - Bringup jenkins instance on gcloud
