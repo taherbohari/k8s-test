@@ -68,6 +68,13 @@ kubectl --namespace default get services -o wide ${INGRESS_NAME}-nginx-ingress-c
 ./beginner/setup-guestbook-application
 ```
 
+- Update your hosts files with public ip of ingress LoadBalancer
+```
+<EXTERNAL_IP> staging-guestbook.mstakx.io
+<EXTERNAL_IP> guestbook.mstakx.io
+```
+**RESULT:** Access guestbook application on above two uri's
+
 - Deploy Horizontal Pod Autoscaler
 ```
 ./beginner/deploy-hpa
