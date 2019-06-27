@@ -19,7 +19,7 @@ cd k8s-test
 
 - Install kubectl on your development instance
 ```
-./beginner/install-prereq
+sudo ./beginner/install-prereq
 ```
 
 - Export all required parameters
