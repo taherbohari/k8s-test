@@ -3,10 +3,20 @@
 SCRIPT=$(readlink -f "$0")
 SCRIPTPATH=$(dirname "$SCRIPT")
 source ${SCRIPTPATH}/vars
+
 echo "## Press ctrl+c to exit"
-echo "##NOTE : You might see Failed to connect message for some time. Be patient"
+PUB_IP=()
+for node in ${NODE_ARR[@]}:
+do
+  IP=$(gcloud compute instances describe ${node} --format='get(networkInterfaces[0].accessConfigs[0].natIP)')
+  PUB_IP+=("${IP}")
+done
+
 while true;
 do
     sleep 1;
-    curl http://${PUB_IP}:${CANARY_PORT}/
+    for ip in ${PUB_IP[@]}:
+    do
+      curl http://${ip}:${CANARY_PORT}/
+    done
 done

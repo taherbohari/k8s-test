@@ -98,3 +98,8 @@ gcloud compute forwarding-rules create kubernetes-forwarding-rule \
   --ports 6443 \
   --region $(gcloud config get-value compute/region) \
   --target-pool kubernetes-target-pool
+
+gcloud compute target-pools create worker-target-pool
+
+gcloud compute target-pools add-instances worker-target-pool \
+   --instances worker-0,worker-1

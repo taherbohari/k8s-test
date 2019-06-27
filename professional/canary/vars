@@ -2,4 +2,4 @@
 
 CANARY_PORT=30010
 NETWORK="mstakx-test"
-PUB_IP=$(gcloud compute instances describe worker-0 --format='get(networkInterfaces[0].accessConfigs[0].natIP)')
+NODE_ARR=($(kubectl get pods -l run=hello-world -n development -o jsonpath='{.items[*].spec.nodeName}'))
