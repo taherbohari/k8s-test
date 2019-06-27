@@ -1,5 +1,8 @@
 # k8s-test
 
+## Beginner Test
+- Follow [README.md](https://github.com/taherbohari/k8s-test/blob/master/beginner/README.md)
+
 ## Professional Test
 #### Prerequisites : 
 - Development instance 
