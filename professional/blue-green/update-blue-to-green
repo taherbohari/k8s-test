@@ -8,7 +8,7 @@ echo "## Updating color app to point to green version"
 kubectl set image deployment/color-app color-app=k8sadmin/blue_green:2.0 -n blue
 
 echo "## wait for few secs to start pods"
-wait 5
+sleep 5
 
 echo "## check if color-app pods are running"
 kubectl get pods -l run=color-app -n blue
