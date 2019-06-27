@@ -8,9 +8,9 @@
 - Development instance 
 - GCP Account
 - Setup gcloud command-line on your development box
-  - For Debian/Ubuntu : https://cloud.google.com/sdk/docs/quickstart-debian-ubuntu
-  - For macOS : https://cloud.google.com/sdk/docs/quickstart-macos
-  - For RedHat and CentOS : https://cloud.google.com/sdk/docs/quickstart-redhat-centos
+  - For [Debian/Ubuntu](https://cloud.google.com/sdk/docs/quickstart-debian-ubuntu)
+  - For [macOS](https://cloud.google.com/sdk/docs/quickstart-macos)
+  - For [RedHat and CentOS](https://cloud.google.com/sdk/docs/quickstart-redhat-centos)
 - ubuntu user with passwordless sudo access on your development box
 - Public internet access
 - Docker Hub Account <Account Details Given In Mail>
