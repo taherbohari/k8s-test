@@ -148,10 +148,6 @@ gcloud compute ssh jenkins --zone=asia-southeast1-b
 sudo cat /var/lib/jenkins/secrets/initialAdminPassword
 ```
 - Configure Jenkins.
-	- Setup GitHub Webhook
-	  - Go to Manage Jenkins -> Configure System -> Scroll down and you will find the GitHub Pull Requests checkbox. 
-          - In the *Published Jenkins URL*, add the repository link *WebHook url* : http://<JENKINS_PUBLIC_IP>:8080/github-webhook/
-	  - Refer below url for details : https://dzone.com/articles/adding-a-github-webhook-in-your-jenkins-pipeline
 	- Access to All for importing jobs via CLI
 	  - Manage Jenkins -> Configure Global Security -> Authorization -> Anyone can do anything (check this radio button)
 	- Add Environment Variable named *DOCKER_HUB* with Docker account Password as value. Password given in mail.
