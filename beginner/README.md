@@ -30,6 +30,7 @@ export K8S_REGION="asia-south1"
 export NODES_PER_ZONE="2"
 export MACHINE_TYPE="n1-standard-1"
 export K8S_VER="1.12.8-gke.10" <This version should be supported by GKE>
+export INGRESS_NAME=<provide your own ingress name>
 ```
 **NOTE : ** Update values as per your requirement
 
