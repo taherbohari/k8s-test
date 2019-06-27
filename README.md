@@ -47,17 +47,17 @@ gcloud compute ssh controller-0
 ```
 ./professional/k8s/create-kubeadm-config
 ```
-###### Setup controller-0 instance. Below steps to run on controller-0 instance
+##### Setup controller-0 instance. Below steps to run on controller-0 instance
 - ssh to controller-0 instance
 ```
 gcloud compute ssh controller-0
 ```
-- Initialize kubeadm. This step will take couple of minutes to run
+- Initialize kubeadm on controller-0 instance. This step will take couple of minutes to run
 ```
 sudo kubeadm init --config=kubeadm.yaml --experimental-upload-certs
 ```
 **NOTE : Save the console output of this command on your local instance.**
-- Setup k8s for ubuntu user
+- Setup k8s for ubuntu user on controller-0 instance
 ```
 mkdir -p $HOME/.kube
 sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
@@ -69,7 +69,7 @@ kubectl apply -f "https://cloud.weave.works/k8s/net?k8s-version=$(kubectl versio
 ```
 - Exit from controller-0 instance
 
-###### Setup remaining controller instances
+##### Setup remaining controller instances
 
 **NOTE :** Run below step on all remaining controller nodes
 - Now ssh to controller-1 instance and add them to cluster.
@@ -78,11 +78,16 @@ gcloud compute ssh controller-1
 ```
 Run below command as root. Refer the console output saved from above step
 ```
-  sudo kubeadm join <CONTROL_PLANE_ENDPOINT> --token <TOKEN> \
+sudo kubeadm join <CONTROL_PLANE_ENDPOINT> --token <TOKEN> \
     --discovery-token-ca-cert-hash <CERT> \
     --experimental-control-plane --certificate-key <CERT>
 ```
-###### Setup remaining worker instances
+```
+mkdir -p $HOME/.kube
+sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+sudo chown $(id -u):$(id -g) $HOME/.kube/config
+```
+##### Setup remaining worker instances
 
 **NOTE :** Run below step on all worker nodes
 - Now ssh to both worker nodes : worker-0, worker-1 and add them to cluster.
