@@ -164,6 +164,10 @@ sudo cat /var/lib/jenkins/secrets/initialAdminPassword
 - Access **k8sadmin** Github account. Access details provided.
 	- Update webhook of k8sadmin/custom_nginx project
 	- Go to Project Settings -> WebHook -> Add Webhook
+```
+	#Command to get jenkins public IP
+	gcloud compute instances describe jenkins --zone=asia-southeast1-b --format='get(networkInterfaces[0].accessConfigs[0].natIP)'
+```
 	- *WebHook :* http://<JENKINS_PUBLIC_IP>:8080/github-webhook/
 - Commands to test CI/CD Pipeline using jenkins
 	- Clone custom_nginx repo and update index.html
