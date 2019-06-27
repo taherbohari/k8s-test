@@ -14,7 +14,7 @@ helm install stable/prometheus \
     --namespace monitoring \
     --name prometheus
 
-kubectl apply -f ${SCRIPTPATH}/monitoring/grafana/config.yml
+kubectl apply -f ${SCRIPTPATH}/grafana/config.yml
 helm install stable/grafana \
     -f ${SCRIPTPATH}/grafana/values.yml \
     --namespace monitoring \
