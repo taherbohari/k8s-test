@@ -58,6 +58,11 @@ ERROR: (gcloud.beta.container.clusters.create) ResponseError: code=403, message=
 ./beginner/deploy-ingress-controller
 ```
 
+- Make note of ExternalIP of LoadBalancer svc
+```
+kubectl --namespace default get services -o wide ${INGRESS_NAME}-nginx-ingress-controller
+```
+
 - Deploy guestbook application
 ```
 ./beginner/setup-guestbook-application
