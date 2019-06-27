@@ -127,7 +127,7 @@ gcloud compute target-pools add-instances kubernetes-target-pool --instances con
 ```
 - Setup helm on local instance
 ```
-sudo ./professional/k8s/setup-helm
+./professional/k8s/setup-helm
 ```
 #### Setup Jenkins
 - Bringup jenkins instance on gcloud
