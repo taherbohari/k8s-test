@@ -155,16 +155,22 @@ sudo cat /var/lib/jenkins/secrets/initialAdminPassword
 - Configure Jenkins.
 	- Access to All for importing jobs via CLI
 	  - Manage Jenkins -> Configure Global Security -> Authorization -> Anyone can do anything (check this radio button)
-	- Add Environment Variable named *DOCKER_HUB* with Docker account Password as value. Password given in mail.
+	- Add Environment Variable named *DOCKER_HUB* with Docker account Password as value. Password given in *EMAIL*.
 	  - Manage Jenkins -> Configure System -> Global properties -> Environment Variables
-- Import jobs into jenkins
+- Import jobs into jenkins. Run below command on your Local Instance
 ```
 ./professional/jenkins/import-jobs
 ```
-- Access **k8sadmin** Github account. Access details provided.
+- Access **k8sadmin** Github account. Access details provided in *EMAIL*.
 	- Update webhook of k8sadmin/custom_nginx project
 	- Go to Project Settings -> WebHook -> Add Webhook
-	- *WebHook :* http://<JENKINS_PUBLIC_IP>:8080/github-webhook/
+```
+	#Command to get jenkins public IP
+	gcloud compute instances describe jenkins --zone=asia-southeast1-b --format='get(networkInterfaces[0].accessConfigs[0].natIP)'
+```
+	- *Payload URL :* http://<JENKINS_PUBLIC_IP>:8080/github-webhook/
+	- *Content Type :* application/x-www-form-urlencoded
+	- *Secret : * Jenkins Secret of first admin user created by you
 - Commands to test CI/CD Pipeline using jenkins
 	- Clone custom_nginx repo and update index.html
   ```
