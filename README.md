@@ -168,7 +168,9 @@ sudo cat /var/lib/jenkins/secrets/initialAdminPassword
 	#Command to get jenkins public IP
 	gcloud compute instances describe jenkins --zone=asia-southeast1-b --format='get(networkInterfaces[0].accessConfigs[0].natIP)'
 ```
-	- *WebHook :* http://<JENKINS_PUBLIC_IP>:8080/github-webhook/
+	- *Payload URL :* http://<JENKINS_PUBLIC_IP>:8080/github-webhook/
+	- *Content Type :* application/x-www-form-urlencoded
+	- *Secret : * Jenkins Secret of first admin user created by you
 - Commands to test CI/CD Pipeline using jenkins
 	- Clone custom_nginx repo and update index.html
   ```
