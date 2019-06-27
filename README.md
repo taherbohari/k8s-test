@@ -23,6 +23,13 @@
 - Jenkins
   - Region : asia-southeast1-b
 
+#### First Step
+- clone this project and cd into repo
+```
+git clone https://github.com/taherbohari/k8s-test.git
+cd k8s-test
+```
+
 #### Setup Local Instance
 - Run install-prereq script
 ```
