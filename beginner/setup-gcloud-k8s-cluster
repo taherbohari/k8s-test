@@ -28,7 +28,7 @@ gcloud beta container \
 	--enable-autorepair
 
 echo "## Setup kubectl to connect newly created k8s cluster"
-gcloud beta container clusters get-credentials standard-cluster-1 --region ${K8S_REGION} --project ${PROJECT_ID}
+gcloud beta container clusters get-credentials ${K8S_CLUSTER_NAME} --region ${K8S_REGION} --project ${PROJECT_ID}
 
 echo "## Checking k8s cluster access"
 kubectl get nodes
