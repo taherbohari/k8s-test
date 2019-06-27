@@ -1,8 +1,5 @@
 #!/bin/bash
 
-echo -e "\n## Installing helm client on your local instance"
-curl -L https://git.io/get_helm.sh | bash
-
 echo -e "\n## Initializing helm"
 echo "# Creating Service Account for tiller"
 (kubectl get sa tiller -n kube-system) || (kubectl create serviceaccount -n kube-system tiller)

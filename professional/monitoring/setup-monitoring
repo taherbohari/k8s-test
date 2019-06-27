@@ -4,6 +4,9 @@ SCRIPT=$(readlink -f "$0")
 SCRIPTPATH=$(dirname "$SCRIPT")
 source ${SCRIPTPATH}/vars
 
+echo "## Helm repo update"
+helm repo update
+
 # Monitoring
 kubectl apply -f ${SCRIPTPATH}/namespace.yml
 helm install stable/prometheus \
@@ -11,7 +14,7 @@ helm install stable/prometheus \
     --namespace monitoring \
     --name prometheus
 
-kubectl apply -f monitoring/grafana/config.yml
+kubectl apply -f ${SCRIPTPATH}/monitoring/grafana/config.yml
 helm install stable/grafana \
     -f ${SCRIPTPATH}/grafana/values.yml \
     --namespace monitoring \

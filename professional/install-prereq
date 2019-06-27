@@ -27,6 +27,9 @@ EOF
 apt-get update
 apt-get install -y kubectl=1.14.0-00
 
+echo -e "\n## Installing helm client on your local instance"
+curl -L https://git.io/get_helm.sh | bash
+
 echo "## Setup gcloud region and zone"
 gcloud config set compute/region ${REGION}
 gcloud config set compute/zone ${ZONE}
