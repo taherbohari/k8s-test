@@ -6,7 +6,7 @@ source ${SCRIPTPATH}/vars
 
 echo "## Press ctrl+c to exit"
 PUB_IP=()
-for node in ${NODE_ARR[@]}:
+for node in ${NODE_ARR[@]}
 do
   IP=$(gcloud compute instances describe ${node} --format='get(networkInterfaces[0].accessConfigs[0].natIP)')
   PUB_IP+=("${IP}")
@@ -15,7 +15,7 @@ done
 while true;
 do
     sleep 1;
-    for ip in ${PUB_IP[@]}:
+    for ip in ${PUB_IP[@]}
     do
       curl http://${ip}:${CANARY_PORT}/
     done
