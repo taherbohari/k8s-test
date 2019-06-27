@@ -1,6 +1,8 @@
 #!/bin/bash -e
 
-source common
+SCRIPT=$(readlink -f "$0")
+SCRIPTPATH=$(dirname "$SCRIPT")
+source ${SCRIPTPATH}/common
 
 guestbook_app_deployment(){
 
@@ -36,7 +38,7 @@ guestbook_app_deployment(){
   kubectl get pods -l app=guestbook -l tier=frontend
  
   echo "## Create guestbook ingress"
-  kubectl apply -f ${namespace}.yaml
+  kubectl apply -f ${SCRIPTPATH}/manifests/${namespace}.yaml
 }
 
 guestbook_app_deployment staging

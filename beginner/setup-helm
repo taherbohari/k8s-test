@@ -1,10 +1,14 @@
 #!/bin/bash -e
 
-source common
-INGRESS_NAME=${INGRESS_NAME:?"Please provide ingress controller name"}
+SCRIPT=$(readlink -f "$0")
+SCRIPTPATH=$(dirname "$SCRIPT")
+source ${SCRIPTPATH}/common
 
 echo -e "\n## Installing helm client on your local instance"
-curl -L https://git.io/get_helm.sh | bash
+curl -LO https://git.io/get_helm.sh
+chmod +x get_helm.sh
+sudo ./get_helm.sh
+rm ./get_helm.sh
 
 echo -e "\n## Set k8s context"
 kubectl create ns ${INGRESS_NAME} || true
@@ -20,11 +24,3 @@ kubectl create clusterrolebinding tiller-cluster-rule --clusterrole=cluster-admi
 
 echo "# Deploying tiller"
 helm init --service-account tiller --wait
-
-echo -e "\n## Deploying Nginx Ingress Controller"
-echo "# Add nginx helm repository"
-helm repo add nginx-stable https://helm.nginx.com/stable
-helm repo update
-
-echo "# Installing nginx ingress controller"
-helm install --name ${INGRESS_NAME} stable/nginx-ingress

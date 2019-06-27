@@ -1,0 +1,10 @@
+#!/bin/bash -e
+
+INGRESS_NAME=${INGRESS_NAME:?"Please provide ingress controller name"}
+echo -e "\n## Deploying Nginx Ingress Controller"
+echo "# Add nginx helm repository"
+helm repo add nginx-stable https://helm.nginx.com/stable
+helm repo update
+
+echo "# Installing nginx ingress controller"
+helm install --name ${INGRESS_NAME} stable/nginx-ingress
