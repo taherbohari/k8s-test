@@ -29,7 +29,7 @@ export K8S_CLUSTER_NAME="test-cluster"
 export K8S_REGION="asia-south1"
 export NODES_PER_ZONE="2"
 export MACHINE_TYPE="n1-standard-1"
-export K8S_VER="1.12.8-gke.6" <This version should be supported by GKE>
+export K8S_VER="1.12.8-gke.10" <This version should be supported by GKE>
 ```
 **NOTE : ** Update values as per your requirement
 
