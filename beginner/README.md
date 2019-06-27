@@ -19,7 +19,7 @@ cd k8s-test
 
 - Install kubectl on your development instance
 ```
-./begginer/install-prereq
+./beginner/install-prereq
 ```
 
 - Export all required parameters
@@ -40,7 +40,7 @@ gcloud projects create ${PROJECT_ID}
 
 - Create kubernetes cluster
 ```
-./begginer/setup-gcloud-k8s-cluster
+./beginner/setup-gcloud-k8s-cluster
 ```
 
 - Setup helm
@@ -50,7 +50,7 @@ gcloud projects create ${PROJECT_ID}
 
 - Deploy ingress controller
 ```
-./begginer/deploy-ingress-controller
+./beginner/deploy-ingress-controller
 ```
 
 - Deploy guestbook application
@@ -60,5 +60,5 @@ gcloud projects create ${PROJECT_ID}
 
 - Deploy Horizontal Pod Autoscaler
 ```
-./begginer/deploy-hpa
+./beginner/deploy-hpa
 ```
