@@ -42,6 +42,10 @@ gcloud projects create ${PROJECT_ID}
 ```
 ./beginner/setup-gcloud-k8s-cluster
 ```
+**NOTE :** If you get below error. You might need to enable Kubernetes Engine API
+```
+ERROR: (gcloud.beta.container.clusters.create) ResponseError: code=403, message=Kubernetes Engine API is not enabled for this project. Please ensure it is enabled in Google Cloud Console and try again: visit https://console.cloud.google.com/apis/api/container.googleapis.com/overview?project=k8s-retest to do so.
+```
 
 - Setup helm
 ```
