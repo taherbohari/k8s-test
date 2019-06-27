@@ -181,7 +181,9 @@ sudo cat /var/lib/jenkins/secrets/initialAdminPassword
 ```
 ./professional/monitoring/setup-monitoring
 ```
-- Login to Grafana. Check console output of above command for credentials.
+- Login to Grafana. 
+
+*NOTE* : Check console output of above command for URL and Credentials.
 	- In the left hand menu, Click on "+" -> Import
 	- In the Grafana.com dashboard input, add the dashboard ID we want to use ie. **1860** and click Load
 	- On the next screen select a name for your dashboard and select Prometheus as the datasource for it and click Import.
