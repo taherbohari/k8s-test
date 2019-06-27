@@ -155,13 +155,13 @@ sudo cat /var/lib/jenkins/secrets/initialAdminPassword
 - Configure Jenkins.
 	- Access to All for importing jobs via CLI
 	  - Manage Jenkins -> Configure Global Security -> Authorization -> Anyone can do anything (check this radio button)
-	- Add Environment Variable named *DOCKER_HUB* with Docker account Password as value. Password given in mail.
+	- Add Environment Variable named *DOCKER_HUB* with Docker account Password as value. Password given in *EMAIL*.
 	  - Manage Jenkins -> Configure System -> Global properties -> Environment Variables
-- Import jobs into jenkins
+- Import jobs into jenkins. Run below command on your Local Instance
 ```
 ./professional/jenkins/import-jobs
 ```
-- Access **k8sadmin** Github account. Access details provided.
+- Access **k8sadmin** Github account. Access details provided in *EMAIL*.
 	- Update webhook of k8sadmin/custom_nginx project
 	- Go to Project Settings -> WebHook -> Add Webhook
 ```
