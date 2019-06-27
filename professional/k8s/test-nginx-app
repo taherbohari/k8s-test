@@ -1,4 +1,4 @@
-#!/bin/bash -e
+#!/bin/bash
 
 node=$(kubectl get pods -l app=mynginx -n development -o jsonpath='{.items[*].spec.nodeName}')
 PUB_IP=$(gcloud compute instances describe ${node} --format='get(networkInterfaces[0].accessConfigs[0].natIP)')
