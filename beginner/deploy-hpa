@@ -1,4 +1,4 @@
 #!/bin/bash -e
 
-kubectl autoscale deployment frontend --cpu-percent=50 --min=1 --max=10 -n staging
-kubectl autoscale deployment frontend --cpu-percent=50 --min=1 --max=10 -n production
+kubectl autoscale deployment frontend --cpu-percent=25 --min=1 --max=10 -n staging
+kubectl autoscale deployment frontend --cpu-percent=25 --min=1 --max=10 -n production
