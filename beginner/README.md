@@ -68,7 +68,7 @@ kubectl --namespace default get services -o wide ${INGRESS_NAME}-nginx-ingress-c
 ./beginner/setup-guestbook-application
 ```
 
-- Update your instance host file with public ip of ingress LoadBalancer
+- Update EXTERNAL_IP in below entries with public ip of ingress LoadBalancer and add them to your instance host file
 ```
 <EXTERNAL_IP> staging-guestbook.mstakx.io
 <EXTERNAL_IP> guestbook.mstakx.io
