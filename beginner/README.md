@@ -159,6 +159,6 @@ frontend   Deployment/frontend   1%/25%    1         10        1          6h8m
 
 - What additional components / plugins would you install on the cluster to manage it better?
 ```	
-  - I would have installed Kubernetes Dashboard, which will provide nice GUI for all our k8s objects
-	- If cluster is not in GCP, then would have installed Weave networking with Weave-Scope in place which is a tool for graphically visualizing your containers, pods, services etc.
+- I would have installed Kubernetes Dashboard, which will provide nice GUI for all our k8s objects
+- If cluster is not in GCP, then would have installed Weave networking with Weave-Scope in place which is a tool for graphically visualizing your containers, pods, services etc.
 ```
