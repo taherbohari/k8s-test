@@ -136,3 +136,29 @@ frontend   Deployment/frontend   1%/25%    1         10        6          6h8m
 frontend   Deployment/frontend   1%/25%    1         10        1          6h8m
 ```
 *RESULT :* Number of replicas back to 1
+
+#### Questions explained
+- What was the node size chosen for the Kubernetes nodes? And why?
+```
+- Node size was n1-standard-1 which gives 1vcpu and around 3.75GB of RAM
+- Have selected 2 nodes per zone totalling 6 for asia-south1 region. So if we consider application load we are pretty much covered with even 4 nodes in place, considering case of 1 entire zone outage.
+```
+
+- What method was chosen to install the demo application and ingress controller on the cluster, justify the method used ?
+```	
+- Used kubectl apply command with manifests taken directly from k8s source repo. kubectl apply will add annotation inside deployment about what was the last command fired, and also we can apply patches to application easily
+- For ingress controller, have used helm charts with stable nginx release. helm charts are pretty much stable and easy to use. Also can apply upgrades easily by doing helm upgrade on chart.
+```
+
+- What would be your chosen solution to monitor the application on the cluster and why?
+```
+- Will use Prometheus for monitoring and Grafana for dashboarding. 
+- To deploy prometheus in cluster will use Prometheus Operator, as it provides Prometheus, Grafana and AlertManager stack in HA mode, with detailed monitoring metrices for your cluster nodes, pods and etcd. Also it provides fully featured Alerting rules which you can use for integrating with Slack/PagerDuty etc.
+- Prometheus comes under CNCF, so it provides easy integration with Kubernetes and is an emerging technology in Monitoring world and a great opensource community.
+```
+
+- What additional components / plugins would you install on the cluster to manage it better?
+```	
+  - I would have installed Kubernetes Dashboard, which will provide nice GUI for all our k8s objects
+	- If cluster is not in GCP, then would have installed Weave networking with Weave-Scope in place which is a tool for graphically visualizing your containers, pods, services etc.
+```
